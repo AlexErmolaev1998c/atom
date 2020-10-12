@@ -11,7 +11,7 @@ public class Util {
         int[] myArray = {1, 2, 3};
         System.out.println("max: " + max(myArray));
         System.out.println("sum: " + max(myArray));
-        System.out.println(getHelloWorld());
+        System.out.println(getHelloWorld());//!
     }
 
     public static String getHelloWorld() {
