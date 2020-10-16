@@ -18,7 +18,7 @@ public class Point implements Collider /* super class and interfaces here if nec
         if (o == null || getClass() != o.getClass()) return false;
 
         // cast from Object to Point
-        Point point = (Point) o;
+        //Point point = (Point) o;
 
         // your code here
         return true;
@@ -27,6 +27,7 @@ public class Point implements Collider /* super class and interfaces here if nec
         this.x = x;
         this.y = y;
     }
+    public Point(){}
 
     @Override
     public boolean isColliding(Collider other) {
