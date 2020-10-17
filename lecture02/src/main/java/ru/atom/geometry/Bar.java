@@ -20,17 +20,24 @@ public class Bar implements Collider {
     @Override
     public boolean isColliding(Collider other) {
         if (other instanceof Point) {
-            Point p = (Point) other;
-            if (p.x >= this.leftUpPoint.x && p.x <= this.rightBottomPoint.x && p.y
-                    >= this.leftUpPoint.y && p.y <= this.rightBottomPoint.y) {
+            Point point = (Point) other;
+            if (point.x >= this.leftUpPoint.x && point.x <= this.rightBottomPoint.x && point.y
+                    >= this.leftUpPoint.y && point.y <= this.rightBottomPoint.y) {
                 return true;
             } else {
                 return false;
             }
         }
         if (other instanceof Bar) {
-            Bar b = (Bar) other;
-            int thisMinX, thisMaxX, bMaxX, bminX, thisMinY, thisMaxY, bMaxY, bminY;
+            Bar bar = (Bar) other;
+            int thisMinX;
+            int thisMaxX;
+            int barMaxX;
+            int barMinX;
+            int thisMinY;
+            int thisMaxY;
+            int barMaxY;
+            int barMinY;
             if (this.leftUpPoint.x < this.rightBottomPoint.x) {
                 thisMinX = this.leftUpPoint.x;
                 thisMaxX = this.rightBottomPoint.x;
@@ -38,12 +45,12 @@ public class Bar implements Collider {
                 thisMinX = this.rightBottomPoint.x;
                 thisMaxX = this.leftUpPoint.x;
             }
-            if (b.leftUpPoint.x < b.rightBottomPoint.x) {
-                bminX = b.leftUpPoint.x;
-                bMaxX = b.rightBottomPoint.x;
+            if (bar.leftUpPoint.x < bar.rightBottomPoint.x) {
+                barMinX = bar.leftUpPoint.x;
+                barMaxX = bar.rightBottomPoint.x;
             } else {
-                bminX = b.rightBottomPoint.x;
-                bMaxX = b.leftUpPoint.x;
+                barMinX = bar.rightBottomPoint.x;
+                barMaxX = bar.leftUpPoint.x;
             }
             if (this.leftUpPoint.y < this.rightBottomPoint.y) {
                 thisMinY = this.leftUpPoint.y;
@@ -52,14 +59,14 @@ public class Bar implements Collider {
                 thisMinY = this.rightBottomPoint.x;
                 thisMaxY = this.leftUpPoint.y;
             }
-            if (b.leftUpPoint.y < b.rightBottomPoint.y) {
-                bminY = b.leftUpPoint.y;
-                bMaxY = b.rightBottomPoint.y;
+            if (bar.leftUpPoint.y < bar.rightBottomPoint.y) {
+                barMinY = bar.leftUpPoint.y;
+                barMaxY = bar.rightBottomPoint.y;
             } else {
-                bminY = b.rightBottomPoint.y;
-                bMaxY = b.leftUpPoint.y;
+                barMinY = bar.rightBottomPoint.y;
+                barMaxY = bar.leftUpPoint.y;
             }
-            if (bMaxX < thisMinX || bMaxY < thisMinY || thisMaxX < bminX || thisMaxY < bminY) {
+            if (barMaxX < thisMinX || barMaxY < thisMinY || thisMaxX < barMinX || thisMaxY < barMinY) {
                 return false;
             } else {
                 return true;
