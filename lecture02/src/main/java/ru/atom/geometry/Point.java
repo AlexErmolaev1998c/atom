@@ -6,7 +6,7 @@ package ru.atom.geometry;
 public class Point implements Collider /* super class and interfaces here if necessary */ {
     // fields
     // and methods
-    protected int x,y;
+    protected int x, y;
 
     /**
      * @param o - other object to check equality with
@@ -23,19 +23,22 @@ public class Point implements Collider /* super class and interfaces here if nec
         // your code here
         return true;
     }
-    public Point(int x, int y){
+
+    public Point(int x, int y) {
         this.x = x;
         this.y = y;
     }
-    public Point(){}
+
+    public Point() {
+    }
 
     @Override
     public boolean isColliding(Collider other) {
-        if (other instanceof Point){
-            Point p = (Point)other;
-            if (this.x == p.x && this.y == p.y){
+        if (other instanceof Point) {
+            Point p = (Point) other;
+            if (this.x == p.x && this.y == p.y) {
                 return true;
-            } else{
+            } else {
                 return false;
             }
         }
