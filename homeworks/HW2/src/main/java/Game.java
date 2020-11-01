@@ -8,8 +8,8 @@ public class Game {
 
     private static Logger log = Logger.getLogger(Game.class.getName());
 
-    private List<String> words = new ArrayList<>();
-    private String secretWord = "";
+    protected List<String> words = new ArrayList<>();
+    protected String secretWord = "";
     private String pathToDictionary;
     private int maxShotsNum = 10;
     private int[] bullAndCows;
@@ -32,7 +32,7 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Bulls and Cows game!");
         while (true) {
-            this.secretWord = makeSecretWord();
+            this.secretWord = makeSecretWord((int)(Math.random()*(this.words.size()-1)));
             log.info("Secret word was made. It is " + this.secretWord);
             int usedShotsNum = 0;
             while (usedShotsNum < maxShotsNum) {
@@ -75,11 +75,10 @@ public class Game {
         fileReader.close();
         log.info("Dictionary was loaded");
     }
-    private String makeSecretWord(){
-        int seed = (int)(Math.random()*(this.words.size()-1));
+    protected String makeSecretWord(int seed){
         return this.words.get(seed);
     }
-    private int[] countBullsAndCows(String userString){
+    protected int[] countBullsAndCows(String userString){
         int[] bullsAndCows = {0,0};
         for (int i = 0; i < userString.length(); i++){
             if (userString.charAt(i) == secretWord.charAt(i)){
