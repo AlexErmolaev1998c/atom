@@ -1,6 +1,8 @@
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,7 +40,8 @@ public class Game {
             log.info("Secret word was made. It is " + this.secretWord);
             int usedShotsNum = 0;
             while (usedShotsNum < maxShotsNum) {
-                System.out.println("Can you guess my secret word? Its length is " + this.secretWord.length() + ". " + "You got " + (maxShotsNum - usedShotsNum) + " shots.");
+                System.out.print("Can you guess my secret word? Its length is " + this.secretWord.length() + ". ");
+                System.out.println("You got " + (maxShotsNum - usedShotsNum) + " shots.");
                 String userString = scanner.next();
                 if (userString.length() != this.secretWord.length()) {
                     System.out.println("Lengths of your word and mine are different.");
@@ -51,7 +54,8 @@ public class Game {
                     break;
                 } else {
                     this.bullAndCows = countBullsAndCows(userString);
-                    System.out.println("Nice try. You almost guessed my secret word. Bulls: " + this.bullAndCows[0] + ", Cows: " + this.bullAndCows[1] + ".");
+                    System.out.print("Nice try. You almost guessed my secret word. Bulls: " + this.bullAndCows[0]);
+                    System.out.println(", Cows: " + this.bullAndCows[1] + ".");
                     usedShotsNum++;
                     if (usedShotsNum == maxShotsNum) {
                         System.out.println("You used all available shots and lost the game :c.");
