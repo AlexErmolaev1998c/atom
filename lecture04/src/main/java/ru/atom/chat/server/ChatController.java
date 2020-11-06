@@ -37,7 +37,7 @@ public class ChatController {
             return ResponseEntity.badRequest().body("Too long name, sorry :(");
         }
         if (usersOnline.containsKey(name)) {
-            return ResponseEntity.badRequest().body("Already logged in:(");
+            return ResponseEntity.badRequest().body("Already logged in :(");
         }
         usersOnline.put(name, name);
         messages.add("[" + name + "] logged in");
