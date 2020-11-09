@@ -58,7 +58,7 @@ public class ChatController {
     }
 
     /**
-     * curl -X DELETE -i localhost:8080/chat/logout -d "name=I_AM_STUPID"
+     * curl -X POST -i localhost:8080/chat/logout -d "name=I_AM_STUPID"
      */
     @RequestMapping(
             path = "logout",
@@ -106,7 +106,7 @@ public class ChatController {
     }
 
     /**
-     * curl -X GET -i localhost:8080/chat/userWordsHistory -d "name=I_AM_STUPID"
+     * curl -i localhost:8080/chat/userWordsHistory?name=I_AM_STUPID
      */
     @RequestMapping(
             path = "userWordsHistory",
