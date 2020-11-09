@@ -62,7 +62,7 @@ public class ChatController {
      */
     @RequestMapping(
             path = "logout",
-            method = RequestMethod.DELETE,
+            method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> logout(@RequestParam("name") String name) {
