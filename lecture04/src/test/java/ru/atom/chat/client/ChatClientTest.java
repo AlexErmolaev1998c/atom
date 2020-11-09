@@ -24,7 +24,7 @@ public class ChatClientTest {
         System.out.println("[" + response + "]");
         String body = response.body().string();
         System.out.println();
-        Assert.assertTrue(response.code() == 200 || body.equals("Already logged in:("));
+        Assert.assertTrue(response.code() == 200 || body.equals("Already logged in :("));
     }
 
     @Test
@@ -50,5 +50,33 @@ public class ChatClientTest {
         System.out.println("[" + response + "]");
         System.out.println(response.body().string());
         Assert.assertEquals(200, response.code());
+    }
+
+    @Test
+    public void logout() throws IOException {
+        Response response = ChatClient.logout(MY_NAME_IN_CHAT);
+        System.out.println("[" + response + "]");
+        String body = response.body().string();
+        System.out.println();
+        Assert.assertTrue(response.code() == 200 || body.equals("This user didn't log in :c"));
+    }
+
+    @Test
+    public void getUserWordsHistory() throws IOException {
+        Response response = ChatClient.getUserWordsHistory(MY_NAME_IN_CHAT);
+        System.out.println("[" + response + "]");
+        String body = response.body().string();
+        System.out.println(body);
+        System.out.println();
+        Assert.assertTrue(response.code() == 200);
+    }
+
+    @Test
+    public void rename() throws IOException {
+        Response response = ChatClient.rename(MY_NAME_IN_CHAT, "I_AM_AWESOME");
+        System.out.println("[" + response + "]");
+        String body = response.body().string();
+        System.out.println();
+        Assert.assertTrue(response.code() == 200 || body.equals("This user didn't log in :c"));
     }
 }
