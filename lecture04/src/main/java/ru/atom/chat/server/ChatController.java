@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Controller
@@ -102,5 +103,42 @@ public class ChatController {
     public ResponseEntity chat() {
         String responseBody = String.join("\n", messages.stream().collect(Collectors.toList()));
         return ResponseEntity.ok(responseBody);
+    }
+
+    /**
+     * curl -X GET -i localhost:8080/chat/userWordsHistory -d "name=I_AM_STUPID"
+     */
+    @RequestMapping(
+            path = "userWordsHistory",
+            method = RequestMethod.GET,
+            produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<String> userWordsHistory(@RequestParam("name") String name) {
+        String responseBody = String.join("\n", messages.stream().filter(new Predicate<String>() {
+            @Override
+            public boolean test(String s) {
+                if (s.startsWith("[" + name + "]")){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }).collect(Collectors.toList()));
+        return ResponseEntity.ok(responseBody);
+    }
+
+    @RequestMapping(
+            path = "rename",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<String> rename(@RequestParam("oldName") String oldName, @RequestParam("newName") String newName) {
+        if (!usersOnline.containsKey(oldName)) {
+            return ResponseEntity.badRequest().body("This user didn't log in :c");
+        } else {
+            usersOnline.remove(oldName);
+            usersOnline.put(newName, newName);
+            messages.add("[" + oldName + "] " + "now has the new name: " + "[" + newName + "]");
+            return ResponseEntity.ok().build();
+        }
     }
 }
