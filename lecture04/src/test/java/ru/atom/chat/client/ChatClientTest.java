@@ -76,7 +76,7 @@ public class ChatClientTest {
         Response response = ChatClient.rename(MY_NAME_IN_CHAT, "I_AM_AWESOME");
         System.out.println("[" + response + "]");
         String body = response.body().string();
-        System.out.println();
+        System.out.println(body);
         Assert.assertTrue(response.code() == 200 || body.equals("This user didn't log in :c"));
     }
 }
