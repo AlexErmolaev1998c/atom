@@ -58,11 +58,11 @@ public class ChatController {
     }
 
     /**
-     * curl -X POST -i localhost:8080/chat/logout -d "name=I_AM_STUPID"
+     * curl -X DELETE -i localhost:8080/chat/logout -d "name=I_AM_STUPID"
      */
     @RequestMapping(
             path = "logout",
-            method = RequestMethod.POST,
+            method = RequestMethod.DELETE,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> logout(@RequestParam("name") String name) {
@@ -116,7 +116,7 @@ public class ChatController {
         String responseBody = String.join("\n", messages.stream().filter(new Predicate<String>() {
             @Override
             public boolean test(String s) {
-                if (s.startsWith("[" + name + "]")){
+                if (s.startsWith("[" + name + "]")) {
                     return true;
                 } else {
                     return false;
@@ -128,7 +128,7 @@ public class ChatController {
 
     @RequestMapping(
             path = "rename",
-            method = RequestMethod.POST,
+            method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> rename(@RequestParam("oldName") String oldName, @RequestParam("newName") String newName) {
