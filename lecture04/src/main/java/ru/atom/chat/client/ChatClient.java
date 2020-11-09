@@ -84,7 +84,7 @@ public class ChatClient {
     public static Response rename(String oldName, String newName) throws IOException {
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
         Request request = new Request.Builder()
-                .post(RequestBody.create(mediaType, ""))
+                .put(RequestBody.create(mediaType, ""))
                 .url(PROTOCOL + HOST + PORT + "/chat/rename?oldName=" + oldName + "&newName=" + newName)
                 .build();
         return client.newCall(request).execute();
