@@ -53,7 +53,8 @@ public class ChatController {
             method = RequestMethod.GET,
             produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity online() {
-        String responseBody = String.join("\n", usersOnline.keySet().stream().sorted().collect(Collectors.toList()));
+        String responseBody = String.join("\n", usersOnline.keySet()
+                .stream().sorted().collect(Collectors.toList()));
         return ResponseEntity.ok(responseBody);
     }
 
@@ -131,7 +132,8 @@ public class ChatController {
             method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<String> rename(@RequestParam("oldName") String oldName, @RequestParam("newName") String newName) {
+    public ResponseEntity<String> rename(@RequestParam("oldName") String oldName,
+                                         @RequestParam("newName") String newName) {
         if (!usersOnline.containsKey(oldName)) {
             return ResponseEntity.badRequest().body("This user didn't log in :c");
         } else {
